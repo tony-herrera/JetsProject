@@ -12,6 +12,7 @@ public class AirField {
 
 	public AirField() {
 		populateFleet();
+		JetMenu();
 	}
 
 	public void populateFleet() {
@@ -22,10 +23,13 @@ public class AirField {
 			String field;
 			while ((field = br.readLine()) != null) {
 				String[] fields = field.split(",");
-				for (int i = 0; i < fields.length; i++) {
-					System.out.println(fields[i]);
-					if (fields[0].contains("cargo")) {
+				{
+					if (fields[4].contains("cargo")) {
 						CargoPlane newJet = new CargoPlane(fields[0], Double.parseDouble(fields[1]),
+								Integer.parseInt(fields[2]), Double.parseDouble(fields[3]));
+						ListOfJets.add(newJet);
+					} else if (fields[4].contains("fighter")) {
+						FighterJet newJet = new FighterJet(fields[0], Double.parseDouble(fields[1]),
 								Integer.parseInt(fields[2]), Double.parseDouble(fields[3]));
 						ListOfJets.add(newJet);
 
@@ -37,30 +41,36 @@ public class AirField {
 		}
 	}
 
-	public void JetMenu() {
-
-		Scanner sc = new Scanner(System.in);
 //		 switch statement here
-		boolean keepGoing = true;
-		while (keepGoing) {
+//		boolean keepGoing = true;
+//		while (keepGoing)
+
+	public void JetMenu() {
+		Scanner sc = new Scanner(System.in);
+		{
 			// Enter user options here for next part
 			System.out.println("Enter 1 for the fleet list");
 			System.out.println("Enter 2 to fly all jets.");
 			System.out.println("Enter 3 to view the fastest jet.");
 			System.out.println("Enter 4 to view jet with the longest range.");
-			System.out.println("Enter 4 to view jet with the longest range.");
+			System.out.println("Enter 5 to view jet with the longest range.");
 			System.out.println("Enter 6 DogFight");
 			System.out.println("Enter 7 to add jet to the fleet.");
 			System.out.println("Enter 8 to remove a jet from fleet.");
 			System.out.println("Enter 9 to quit.");
+			System.out.println("Please make a selection: ");
 			String userInput = sc.next();
+
 			switch (userInput) {
 
-			case "1":
-
-				System.out.println("Would you like to make another selection?");
+			case "1": {
+				for (Jet jet : ListOfJets) {
+					if (ListOfJets != null) {
+						System.out.println(jet);
+					}
+				}
+			}
 				break;
-
 			case "2":
 				break;
 			case "3":
@@ -77,10 +87,16 @@ public class AirField {
 				break;
 			case "9":
 				System.out.println("Good-Bye!");
-				keepGoing = false;
-			default:
+//				keepGoing = false;
+//			default:
 			}
 		}
 		sc.close();
 	}
+
 }
+
+//				for (int i = 0; i < ListOfJets.size(); i++) {
+//					if (ListOfJets != null) {
+//					}
+//					System.out.println(ListOfJets.get(i));

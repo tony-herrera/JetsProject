@@ -9,7 +9,6 @@ public class JetsApp {
 
 	public static void main(String[] args) {
 		AirField airField = new AirField();
-		airField.populateFleet();
 		
 	}
 

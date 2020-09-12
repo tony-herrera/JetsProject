@@ -1,5 +1,5 @@
-cargo,250.0,500,45000
-MilleniunFalcon,250.0,500,45000
-Prometheus,300.0,500,50000
-XJet,400.0,400,500000
-SpaceXDragon,300.0,500,50000
+MilleniunFalcon,250.0,500,45000,cargo
+Prometheus,300.0,500,50000,cargo
+XJet,400.0,400,500000,fighter
+SpaceXDragon,300.0,500,50000,fighter
+Johns,32.0,444,1000,cargo
