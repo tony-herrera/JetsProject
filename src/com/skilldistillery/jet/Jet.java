@@ -15,6 +15,8 @@ public abstract class Jet {
 	}
 
 	public void fly() {
+		
+		System.out.println(model + "" + " There they goooo! " + (range/speed) + " hours.\n" + "For the low low price of " + price);
 
 	}
 

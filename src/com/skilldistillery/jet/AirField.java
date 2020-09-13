@@ -71,8 +71,16 @@ public class AirField {
 				}
 			}
 				break;
+
 			case "2":
+				for (Jet jet : ListOfJets) {
+					if (ListOfJets != null) {
+						jet.fly();
+						System.out.println();
+					}
+				}
 				break;
+
 			case "3":
 				break;
 			case "4":
