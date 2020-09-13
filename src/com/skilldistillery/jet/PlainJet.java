@@ -6,4 +6,10 @@ public class PlainJet extends Jet {
 		super(model, speed, range, price);
 	}
 
+	@Override
+	public String toString() {
+		return "PlainJet [getModel()=" + getModel() + ", getSpeed()=" + getSpeed() + ", getRange()=" + getRange()
+				+ ", getPrice()=" + getPrice();
+	}
+
 }

@@ -53,6 +53,8 @@ public abstract class Jet {
 	}
 
 	public double getSpeedInMach() {
+		double machSpeed = this.speed / 2;
+		
 		return speed;
 
 	}

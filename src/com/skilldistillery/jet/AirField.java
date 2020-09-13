@@ -116,11 +116,22 @@ public class AirField {
 						}
 					}
 					break;
-					
+
 				case "7":
+					addJet();
 					break;
+
 				case "8":
+					int i = 1;
+					for (Jet jet : ListOfJets) {
+						System.out.println(i + " " + jet.getModel());;
+						i++;
+					}
+					System.out.println("Select the number corresponding to the ship you would like to delete:");
+					int delete = sc.nextInt();
+					this.ListOfJets.remove(delete -1);
 					break;
+					
 				case "9":
 					System.out.println("Good-Bye!");
 					keepGoing = true;
@@ -141,4 +152,39 @@ public class AirField {
 
 	}
 
+	public void addJet() {
+		Scanner sc = new Scanner(System.in);
+		boolean keepGoing = true;
+		while (keepGoing) {
+			System.out.println("Please, select either a fighter, cargo, or plain type of aircraft: ");
+			String model = sc.nextLine();
+			model = model.toLowerCase();
+			System.out.println("Please, select the name: ");
+			String name = sc.nextLine();
+			System.out.println("Enter the speed in MPH: ");
+			double speed = sc.nextDouble();
+			System.out.println("Enter the range: ");
+			int range = sc.nextInt();
+			System.out.println("Enter the price: ");
+			double price = sc.nextDouble();
+			if (model.contentEquals("fighter")) {
+				this.ListOfJets.add(new FighterJet(name, speed, range, price));
+			}
+
+			if (model.contentEquals("cargo")) {
+				this.ListOfJets.add(new CargoPlane(name, speed, range, price));
+			}
+
+			if (model.contentEquals("plain")) {
+				this.ListOfJets.add(new PlainJet(name, speed, range, price));
+			}
+			sc.nextLine();
+			keepGoing = false;
+		}
+
+	}
+	
+	public void removeJet () {
+		
+	}
 }
