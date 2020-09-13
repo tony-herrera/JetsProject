@@ -1,5 +1,4 @@
 package com.skilldistillery.jet;
-
 public abstract class Jet {
 	private String model;
 	private double speed;
@@ -16,7 +15,8 @@ public abstract class Jet {
 
 	public void fly() {
 		
-		System.out.println(model + "" + " There they goooo! " + (range/speed) + " hours.\n" + "For the low low price of " + price);
+		
+		System.out.println(model + "" + " There they goooo! " + (range/speed) +  " hours.\n" + "For the low low price of " + (price));
 
 	}
 

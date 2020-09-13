@@ -1,21 +1,20 @@
 package com.skilldistillery.jet;
 
 public class CargoPlane extends Jet implements XJet {
+	
+	
+	public void CargoPlane() {
+		
+	}
 
 	public CargoPlane(String model, double speed, int range, double price) {
 		super(model, speed, range, price);
 	}
 
 	@Override
-	public void loadXmen() {
-		// TODO Auto-generated method stub
-		
+	public void loadCargo() {
+		System.out.println(getModel() + "\n All loaded up!!");
 	}
 
-	@Override
-	public void unleashPowers() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -3,6 +3,7 @@ package com.skilldistillery.jet;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class AirField {
 						ListOfJets.add(newJet);
 					} else if (fields[4].contains("fighter")) {
 						FighterJet newJet = new FighterJet(fields[0], Double.parseDouble(fields[1]),
-								Integer.parseInt(fields[2]), Double.parseDouble(fields[3]));
+								Integer.parseInt(fields[2]), Float.parseFloat(fields[3]));
 						ListOfJets.add(newJet);
 
 					}
@@ -42,69 +43,102 @@ public class AirField {
 	}
 
 //		 switch statement here
-//		boolean keepGoing = true;
-//		while (keepGoing)
 
 	public void JetMenu() {
 		Scanner sc = new Scanner(System.in);
-		{
-			// Enter user options here for next part
-			System.out.println("Enter 1 for the fleet list");
-			System.out.println("Enter 2 to fly all jets.");
-			System.out.println("Enter 3 to view the fastest jet.");
-			System.out.println("Enter 4 to view jet with the longest range.");
-			System.out.println("Enter 5 to view jet with the longest range.");
-			System.out.println("Enter 6 DogFight");
-			System.out.println("Enter 7 to add jet to the fleet.");
-			System.out.println("Enter 8 to remove a jet from fleet.");
-			System.out.println("Enter 9 to quit.");
-			System.out.println("Please make a selection: ");
-			String userInput = sc.next();
+		boolean keepGoing = false;
+		while (!keepGoing) {
+			{
+				// Enter user options here for next part
+				System.out.println("Enter 1 for the fleet list");
+				System.out.println("Enter 2 to fly all jets.");
+				System.out.println("Enter 3 to view the fastest jet.");
+				System.out.println("Enter 4 to view jet with the longest range.");
+				System.out.println("Enter 5 to load the cargo jets.");
+				System.out.println("Enter 6 DogFight");
+				System.out.println("Enter 7 to add jet to the fleet.");
+				System.out.println("Enter 8 to remove a jet from fleet.");
+				System.out.println("Enter 9 to quit.");
+				System.out.println("Please make a selection: ");
+				String userInput = sc.next();
 
-			switch (userInput) {
+				switch (userInput) {
 
-			case "1": {
-				for (Jet jet : ListOfJets) {
-					if (ListOfJets != null) {
-						System.out.println(jet);
+				case "1":
+					ListOfJets();
+					break;
+
+				case "2":
+					for (Jet jet : ListOfJets) {
+						if (ListOfJets != null) {
+							jet.fly();
+							System.out.println();
+						}
 					}
-				}
-			}
-				break;
+					break;
 
-			case "2":
-				for (Jet jet : ListOfJets) {
-					if (ListOfJets != null) {
-						jet.fly();
-						System.out.println();
+				case "3":
+					Jet speedOfJets = ListOfJets.get(0);
+					for (int i = 0; i < ListOfJets.size(); i++) {
+						Jet speedOfJetTracker = ListOfJets.get(i);
+						if (speedOfJets.getSpeed() < speedOfJetTracker.getSpeed()) {
+							speedOfJets = speedOfJetTracker;
+						}
 					}
-				}
-				break;
+					System.out.println(speedOfJets);
+					break;
 
-			case "3":
-				break;
-			case "4":
-				break;
-			case "5":
-				break;
-			case "6":
-				break;
-			case "7":
-				break;
-			case "8":
-				break;
-			case "9":
-				System.out.println("Good-Bye!");
-//				keepGoing = false;
-//			default:
+				case "4":
+					Jet rangeOfJets = ListOfJets.get(0);
+					for (int i = 0; i < ListOfJets.size(); i++) {
+						Jet rangeOfJetTracker = ListOfJets.get(i);
+						if (rangeOfJets.getRange() < rangeOfJetTracker.getRange()) {
+							rangeOfJets = rangeOfJetTracker;
+						}
+					}
+					System.out.println(rangeOfJets);
+					break;
+				case "5":
+					for (Jet jet : ListOfJets) {
+						if (jet instanceof XJet) {
+							((XJet) jet).loadCargo();
+						} else {
+							continue;
+						}
+					}
+					break;
+				case "6":
+					for (Jet jet : ListOfJets) {
+						if (jet instanceof UNSCInfinity) {
+							((UNSCInfinity) jet).bringMasterChief();
+						} else {
+							continue;
+						}
+					}
+					break;
+					
+				case "7":
+					break;
+				case "8":
+					break;
+				case "9":
+					System.out.println("Good-Bye!");
+					keepGoing = true;
+				default:
+				}
+
 			}
 		}
 		sc.close();
 	}
 
-}
+	public void ListOfJets() {
+		for (Jet jet : ListOfJets) {
+			if (ListOfJets != null) {
+				System.out.println(jet);
+			}
+		}
 
-//				for (int i = 0; i < ListOfJets.size(); i++) {
-//					if (ListOfJets != null) {
-//					}
-//					System.out.println(ListOfJets.get(i));
+	}
+
+}
