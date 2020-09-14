@@ -1,4 +1,5 @@
 package com.skilldistillery.jet;
+
 public abstract class Jet {
 	private String model;
 	private double speed;
@@ -14,9 +15,11 @@ public abstract class Jet {
 	}
 
 	public void fly() {
-		
-		
-		System.out.println(model + "" + " There they goooo! " + (range/speed) +  " hours.\n" + "For the low low price of " + (price));
+
+		System.out.println(model + "" + ". There they goooo! " + "This aircraft can go the distance folks at: "
+				+ (range) + " miles!" + " With a whopping speed of " + (speed) + " mph " + 
+				" The total fly time is approximately: " +
+				(range / speed) + " hours.\n" + " Come, get it today! For the low low price of " + (price));
 
 	}
 
@@ -54,7 +57,7 @@ public abstract class Jet {
 
 	public double getSpeedInMach() {
 		double machSpeed = this.speed / 2;
-		
+
 		return speed;
 
 	}

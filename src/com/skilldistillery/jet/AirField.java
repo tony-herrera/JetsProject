@@ -1,6 +1,7 @@
 package com.skilldistillery.jet;
 
 import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +34,10 @@ public class AirField {
 						FighterJet newJet = new FighterJet(fields[0], Double.parseDouble(fields[1]),
 								Integer.parseInt(fields[2]), Float.parseFloat(fields[3]));
 						ListOfJets.add(newJet);
-
+					} else if (fields[4].contains("plain")) {
+						PlainJet newJet = new PlainJet(fields[0], Double.parseDouble(fields[1]),
+								Integer.parseInt(fields[2]), Float.parseFloat(fields[3]));
+						ListOfJets.add(newJet);
 					}
 				}
 			}
@@ -45,10 +49,26 @@ public class AirField {
 //		 switch statement here
 
 	public void JetMenu() {
+
 		Scanner sc = new Scanner(System.in);
 		boolean keepGoing = false;
 		while (!keepGoing) {
 			{
+
+				System.out.println("                    `. ___\n"
+						+ "                    __,' __`.                _..----....____\n"
+						+ "        __...--.'``;.   ,.   ;``--..__     .'    ,-._    _.-'\n"
+						+ "  _..-''-------'   `'   `'   `'     O ``-''._   (,;') _,'\n"
+						+ ",'________________                          \\`-._`-','\n"
+						+ " `._              ```````````------...___   '-.._'-:\n"
+						+ "    ```--.._      ,.                     ````--...__\\-.\n"
+						+ "            `.--. `-`                       ____    |  |`\n"
+						+ "              `. `.                       ,'`````.  ;  ;`\n"
+						+ "                `._`.        __________   `.      \\'__/`\n"
+						+ "                   `-:._____/______/___/____`.     \\  `\n"
+						+ "                               |       `._    `.    \\\n"
+						+ "                               `._________`-.   `.   `.___\n"
+						+ "                                             SSt  `------'`");
 				// Enter user options here for next part
 				System.out.println("Enter 1 for the fleet list");
 				System.out.println("Enter 2 to fly all jets.");
@@ -78,43 +98,19 @@ public class AirField {
 					break;
 
 				case "3":
-					Jet speedOfJets = ListOfJets.get(0);
-					for (int i = 0; i < ListOfJets.size(); i++) {
-						Jet speedOfJetTracker = ListOfJets.get(i);
-						if (speedOfJets.getSpeed() < speedOfJetTracker.getSpeed()) {
-							speedOfJets = speedOfJetTracker;
-						}
-					}
-					System.out.println(speedOfJets);
+					SpeedOfJets();
 					break;
 
 				case "4":
-					Jet rangeOfJets = ListOfJets.get(0);
-					for (int i = 0; i < ListOfJets.size(); i++) {
-						Jet rangeOfJetTracker = ListOfJets.get(i);
-						if (rangeOfJets.getRange() < rangeOfJetTracker.getRange()) {
-							rangeOfJets = rangeOfJetTracker;
-						}
-					}
-					System.out.println(rangeOfJets);
+					RangeOfJets();
 					break;
+
 				case "5":
-					for (Jet jet : ListOfJets) {
-						if (jet instanceof XJet) {
-							((XJet) jet).loadCargo();
-						} else {
-							continue;
-						}
-					}
+					LoadTheJets();
 					break;
+
 				case "6":
-					for (Jet jet : ListOfJets) {
-						if (jet instanceof UNSCInfinity) {
-							((UNSCInfinity) jet).bringMasterChief();
-						} else {
-							continue;
-						}
-					}
+					DogFight();
 					break;
 
 				case "7":
@@ -122,22 +118,34 @@ public class AirField {
 					break;
 
 				case "8":
-					int i = 1;
-					for (Jet jet : ListOfJets) {
-						System.out.println(i + " " + jet.getModel());;
-						i++;
-					}
-					System.out.println("Select the number corresponding to the ship you would like to delete:");
-					int delete = sc.nextInt();
-					this.ListOfJets.remove(delete -1);
+					RemoveJet();
 					break;
-					
+
 				case "9":
+					System.out.println("       /\\\n" + "                         |  |\n"
+							+ "                         |  |\n" + "                        .'  '.\n"
+							+ "                        |    |\n" + "                        |    |\n"
+							+ "                        | /\\ |\n" + "                      .' |__|'.\n"
+							+ "                      |  |  |  |\n" + "                     .'  |  |  '.\n"
+							+ "                /\\   |   \\__/   |   /\\\n"
+							+ "               |  |  |   |  |   |  |  |\n"
+							+ "           /|  |  |,-\\   |  |   /-,|  |  |\\\n"
+							+ "           ||  |,-'   |  |  |  |   '-,|  ||\n"
+							+ "           ||-'       |  |  |  |       '-||\n"
+							+ "|\\     _,-'           |  |  |  |           '-,_     /|\n"
+							+ "||  ,-'   _           |  |  |  |               '-,  ||\n"
+							+ "||-'    =(*)=         |  |  |  |                  '-||\n"
+							+ "||                    |  \\  /  |                    ||\n"
+							+ "|\\________....--------\\   ||   /--------....________/|\n"
+							+ "                      /|  ||  |\\\n" + "                     / |  ||  | \\\n"
+							+ "                    /  |  \\/  |  \\\n" + "                   /   |      |   \\   \n"
+							+ "                 //   .|      |.   \\\\\n" + "               .' |_./ |      | \\._| '.\n"
+							+ "              /     _.-|||  |||-._     \\\n"
+							+ "              \\__.-'   \\||/\\||/   '-.__/ ");
 					System.out.println("Good-Bye!");
 					keepGoing = true;
 				default:
 				}
-
 			}
 		}
 		sc.close();
@@ -150,6 +158,48 @@ public class AirField {
 			}
 		}
 
+	}
+
+	public void SpeedOfJets() {
+		Jet speedOfJets = ListOfJets.get(0);
+		for (int i = 0; i < ListOfJets.size(); i++) {
+			Jet speedOfJetTracker = ListOfJets.get(i);
+			if (speedOfJets.getSpeed() < speedOfJetTracker.getSpeed()) {
+				speedOfJets = speedOfJetTracker;
+			}
+		}
+		System.out.println(speedOfJets);
+	}
+
+	public void RangeOfJets() {
+		Jet rangeOfJets = ListOfJets.get(0);
+		for (int i = 0; i < ListOfJets.size(); i++) {
+			Jet rangeOfJetTracker = ListOfJets.get(i);
+			if (rangeOfJets.getRange() < rangeOfJetTracker.getRange()) {
+				rangeOfJets = rangeOfJetTracker;
+			}
+		}
+		System.out.println(rangeOfJets);
+	}
+
+	public void LoadTheJets() {
+		for (Jet jet : ListOfJets) {
+			if (jet instanceof XJet) {
+				((XJet) jet).loadCargo();
+			} else {
+				continue;
+			}
+		}
+	}
+
+	public void DogFight() {
+		for (Jet jet : ListOfJets) {
+			if (jet instanceof UNSCInfinity) {
+				((UNSCInfinity) jet).bringMasterChief();
+			} else {
+				continue;
+			}
+		}
 	}
 
 	public void addJet() {
@@ -180,11 +230,23 @@ public class AirField {
 			}
 			sc.nextLine();
 			keepGoing = false;
+//			sc.close();
 		}
 
 	}
-	
-	public void removeJet () {
-		
+
+	public void RemoveJet() {
+		Scanner sc = new Scanner(System.in);
+		int i = 1;
+		for (Jet jet : ListOfJets) {
+			System.out.println(i + " " + jet.getModel());
+			;
+			i++;
+		}
+		System.out.println("Select the number corresponding to the ship you would like to delete:");
+		int delete = sc.nextInt();
+		this.ListOfJets.remove(delete - 1);
+//		sc.close();
 	}
+
 }
